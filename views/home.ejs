@@ -1,0 +1,64 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Kalam&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Kenia&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+        <title>To-Do List</title>
+        <link href="/public/home.css" rel="stylesheet">
+    </head>
+    <body style="background-image: url('https://images.unsplash.com/photo-1513708929605-6dd0e1b081bd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1476&q=80');background-repeat: no-repeat; background-size:cover;  color:white">
+    <div class="container">
+        <h1 style=" font-family: 'Kenia', cursive;color: #00FFF6; margin-top:100px; text-align: center; font-size: 80px; text-shadow: 3px 3px #ff8800; "><%= title %></h1>
+        <% if(action == 'add') { %>
+                <form method="POST" action="/home/add_sample_data" style="text-align:center; margin: 50px 0px 0px 0px ;">
+                    <input type="text" name="first_name" id="first_name"  placeholder="Enter New Task" autocomplete="off" style="border: 1px solid palegreen; border-radius: 15px ;margin: 10px 0px 30px 0px ; text-align:center; padding: 20px; width: 40%; background-color: rgb(144, 222, 148); color: black; font-size: 20px;" required/>
+                    <br>
+                    <button type="submit" name="submit_button" style="color: rgb(255, 255, 255); background-color:rgb(51, 34, 181); border:2px solid rgb(136, 136, 136); border-radius:10px; font-size: 25px; width: 7%;" >Add</button>
+                </form>
+        <% } else if(action == 'edit') { %>
+            <% var data=sampleData %>
+                <form method="POST" action="/home/edit/<%= sampleData.id %>">
+                    <input type="text" name="first_name" id="first_name" value="<%= sampleData.task%>" placeholder="Edit" style="border: 1px solid palegreen; border-radius: 15px ;margin: 50px 0px 30px 0px ; text-align:center; padding: 20px; width: 40%; background-color: rgb(144, 222, 148); margin-left: 30%; font-size: 20px;" required/>
+                    <br>
+                    <button type="submit" style="color: white; background-color:rgb(51, 34, 181); border:2px solid white; border-radius:10px; font-size: 20px; width: 8%; margin-left: 46%; padding: 8px; text-align: center;" >Update</button>
+                </form>
+        <% } else { %>
+        <div class="row" style="margin:8% 0% 0% 35%; text-align:center">
+            <div class="col" style="margin-top:15px ; font-size:30px;font-family:'Courier New', Courier, monospace; font-weight: 600; text-shadow: 2px 2px #ff8800;">Your Tasks</div>
+            <!-- <div style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ; font-size: 25px; color: green;"> -->
+                <a href="/home/add" style="margin:10px 420px 10px 90px; background-color:#FA7D09; border: 4px solid #EB6440; border-radius: 8px; text-decoration: none; color:#D6E4E5; padding:5px 5px 0px 5px; width: 10%; height: 10%;"><i class="material-icons">add task</i></a>
+            <!-- </div> -->
+        </div>
+            <table style="width:40%; align-items: center; margin: 2% 0% 0% 33%; border-radius: 2px solid white;">
+                <%
+                if(sampleData.length > 0){
+                    sampleData.forEach(function(data){
+                %>
+                <tr>
+                    <!-- <td style="text-align: left; height:60px ; margin-bottom: 10px; width: 0%; font-size: larger; font-family: 'Archivo Black', sans-serif; color: #CDDEFF; font-weight:800;"><%= data.id %></td> -->
+                        <td style="  margin-bottom: 10px; font-family: 'Kalam', cursive; text-align: center; width: 60%; height:60px; font-size: 32px; font-weight: 600; color: #FB2576; text-shadow: 1px 1px #2192FF;"><%= data.task %></td>
+                    <td>
+                        <a style="background-color: #10A19D ; margin: 0px 5px 15px 2px; text-align:center; border:1.5px solid grey; border-radius:13px; width:40%; padding:7% 7% 2% 7% ; text-decoration: none; color: white; box-shadow: 1.5px 1.5px #66bdba;" href="/home/edit/<%= data.id %>;" ><i class="material-icons">edit</i></a>
+                        <a style="background-color: #CF0A0A ; margin: 2px 5px 15px 2px; text-align:center; border:1.5px solid grey; border-radius:13px; width:40%; padding:7% 7% 2% 7% ;  text-decoration: none; color: white; box-shadow: 1.5px 1.5px #c24f4f;" href="/home/delete/<%= data.id %>" ><i class="material-icons">delete</i></a>
+                    </td>
+                </tr>
+                <%
+                    });
+                } else { %>
+                <tr>
+                    <td  style="  margin-bottom: 10px; font-family: 'Kalam', cursive; text-align: center; width: 60%; height:60px; font-size: 32px; font-weight: 600; color: #FB2576; text-shadow: 1px 1px #2192FF;">No Tasks</td>
+                </tr>
+                <% } %>
+            </table>
+            <% } %>
+    </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    </body>
+</html>
