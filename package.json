@@ -1,6 +1,6 @@
 {
-  "name": "crud",
-  "version": "0.0.0",
+  "name": "todolist",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
@@ -15,5 +15,25 @@
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "mysql": "^2.18.1"
-  }
+  },
+  "description": "\"# ToDo_List\"",
+  "main": "home.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AshutoshKY/ToDo_List.git"
+  },
+  "keywords": [
+    "to-doList",
+    "JS",
+    "ExpressJS",
+    "ejs",
+    "mysql"
+  ],
+  "author": "AshutoshKY",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AshutoshKY/ToDo_List/issues"
+  },
+  "homepage": "https://github.com/AshutoshKY/ToDo_List#readme"
 }
